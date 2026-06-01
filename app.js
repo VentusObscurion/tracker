@@ -1154,7 +1154,20 @@ function initEventListeners() {
 
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {
+    navigator.serviceWorker.register('./sw.js').then(registration => {
+      // Check for updates immediately on load
+      registration.update();
+
+      // Re-check every time the app becomes visible (e.g. switching back from another app)
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') registration.update();
+      });
+
+      // When a new SW takes over, reload to get fresh files
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        window.location.reload();
+      });
+    }).catch(() => {
       // Silent fail — app still works without SW
     });
   }

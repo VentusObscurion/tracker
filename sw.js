@@ -2,7 +2,7 @@
    Cache-first strategy for all static assets.
    Version bump = cache invalidation. */
 
-const CACHE_NAME = 'tracker-cache-v1';
+const CACHE_NAME = 'tracker-cache-v2';
 
 const STATIC_ASSETS = [
   './index.html',
@@ -33,22 +33,40 @@ self.addEventListener('activate', event => {
   );
 });
 
-// ---- Fetch: cache-first, fall back to network ----
+// ---- Fetch: network-first for HTML, cache-first for everything else ----
 self.addEventListener('fetch', event => {
   // Only handle same-origin GET requests
   if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-      return fetch(event.request).then(response => {
-        // Cache successful responses for same-origin requests
-        if (response && response.status === 200 && response.type === 'basic') {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      });
-    })
-  );
+  const url = new URL(event.request.url);
+  const isHtml = url.pathname.endsWith('.html') || url.pathname.endsWith('/');
+
+  if (isHtml) {
+    // Network-first for HTML: always try to get fresh markup
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+  } else {
+    // Cache-first for JS/CSS/assets
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        const networkFetch = fetch(event.request).then(response => {
+          if (response && response.status === 200 && response.type === 'basic') {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        });
+        return cached || networkFetch;
+      })
+    );
+  }
 });
