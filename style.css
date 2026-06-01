@@ -1,4 +1,4 @@
-/* ======================================================
+﻿/* ======================================================
    TRACKER — Dark Coral Theme
    Mobile-first, PWA-ready
    ====================================================== */
@@ -13,11 +13,11 @@
   --bg-modal:        #141426;
   --bg-header:       #0c0c18;
 
-  --coral:           #ff6b6b;
-  --coral-hover:     #ff4757;
-  --coral-dim:       rgba(255, 107, 107, 0.14);
-  --coral-border:    rgba(255, 107, 107, 0.4);
-  --coral-glow:      0 0 20px rgba(255, 107, 107, 0.3);
+  --coral:           #F88379;
+  --coral-hover:     #e8604f;
+  --coral-dim:       rgba(248, 131, 121, 0.14);
+  --coral-border:    rgba(248, 131, 121, 0.4);
+  --coral-glow:      0 0 20px rgba(248, 131, 121, 0.3);
 
   --text-primary:    #e8e8f5;
   --text-secondary:  #9898c0;
@@ -28,7 +28,7 @@
 
   --status-planned:  #7b8ec8;
   --status-active:   #4ecdc4;
-  --status-done:     #ff6b6b;
+  --status-done:     #F88379;
   --status-dropped:  #555575;
 
   --radius-xs: 4px;
@@ -40,7 +40,7 @@
 
   --shadow-card:  0 2px 16px rgba(0, 0, 0, 0.4);
   --shadow-modal: 0 8px 56px rgba(0, 0, 0, 0.75);
-  --shadow-fab:   0 4px 22px rgba(255, 107, 107, 0.45);
+  --shadow-fab:   0 4px 22px rgba(248, 131, 121, 0.45);
 
   --transition: 0.18s ease;
 
@@ -327,7 +327,7 @@ input, select, textarea {
 
 .card:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(255, 107, 107, 0.22);
+  border-color: rgba(248, 131, 121, 0.22);
   box-shadow: var(--shadow-card);
 }
 
@@ -376,7 +376,7 @@ input, select, textarea {
 .status-spielend,
 .status-schauend    { background: rgba(78, 205, 196, 0.15);  color: var(--status-active);  border: 1px solid rgba(78, 205, 196, 0.25); }
 .status-gespielt,
-.status-geschaut    { background: rgba(255, 107, 107, 0.15); color: var(--coral);           border: 1px solid rgba(255, 107, 107, 0.25); }
+.status-geschaut    { background: rgba(248, 131, 121, 0.15); color: var(--coral);           border: 1px solid rgba(248, 131, 121, 0.25); }
 .status-abgebrochen { background: rgba(85, 85, 117, 0.2);   color: var(--status-dropped);  border: 1px solid rgba(85, 85, 117, 0.25); }
 
 .card-title {
@@ -453,7 +453,7 @@ input, select, textarea {
 
 .card-action-btn.danger:hover {
   background: rgba(255, 71, 87, 0.15);
-  color: #ff4757;
+  color: #e8604f;
 }
 
 .card-action-btn.btn-quick-done {
@@ -498,7 +498,7 @@ input, select, textarea {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--coral), #ff9090);
+  background: linear-gradient(90deg, var(--coral), #fbb0a9);
   border-radius: var(--radius-full);
   transition: width 0.5s ease;
 }
@@ -567,7 +567,7 @@ input, select, textarea {
 .fab:hover {
   background: var(--coral-hover);
   transform: scale(1.06);
-  box-shadow: 0 6px 32px rgba(255, 107, 107, 0.6);
+  box-shadow: 0 6px 32px rgba(248, 131, 121, 0.6);
 }
 
 .fab:active {
@@ -854,7 +854,7 @@ input[type="range"].rating-slider::-webkit-slider-thumb {
   border-radius: 50%;
   background: var(--coral);
   cursor: pointer;
-  box-shadow: 0 0 0 3px var(--coral-dim), 0 2px 8px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 0 0 3px var(--coral-dim), 0 2px 8px rgba(248, 131, 121, 0.4);
   transition: transform var(--transition);
 }
 
@@ -922,12 +922,12 @@ input[type="range"].rating-slider::-moz-range-thumb {
 .btn-primary {
   background: var(--coral);
   color: white;
-  box-shadow: 0 2px 12px rgba(255, 107, 107, 0.35);
+  box-shadow: 0 2px 12px rgba(248, 131, 121, 0.35);
 }
 
 .btn-primary:hover {
   background: var(--coral-hover);
-  box-shadow: 0 4px 18px rgba(255, 107, 107, 0.5);
+  box-shadow: 0 4px 18px rgba(248, 131, 121, 0.5);
 }
 
 .btn-primary:active {
@@ -947,7 +947,7 @@ input[type="range"].rating-slider::-moz-range-thumb {
 
 .btn-danger {
   background: rgba(255, 71, 87, 0.12);
-  color: #ff4757;
+  color: #e8604f;
   border: 1px solid rgba(255, 71, 87, 0.25);
 }
 
@@ -1090,8 +1090,8 @@ input[type="range"].rating-slider::-moz-range-thumb {
 }
 
 .settings-info {
-  background: rgba(255, 107, 107, 0.07);
-  border: 1px solid rgba(255, 107, 107, 0.2);
+  background: rgba(248, 131, 121, 0.07);
+  border: 1px solid rgba(248, 131, 121, 0.2);
   border-radius: var(--radius-md);
   padding: 12px 14px;
   font-size: 13px;

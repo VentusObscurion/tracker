@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 // ======================================================
 //  CONSTANTS
@@ -772,7 +772,7 @@ const SYNC_STATUS_MAP = {
   'idle':     { color: 'var(--text-muted)',   spin: false, label: 'Bereit' },
   'syncing':  { color: 'var(--coral)',         spin: true,  label: 'Synchronisiere…' },
   'ok':       { color: 'var(--status-active)', spin: false, label: null }, // label set dynamically
-  'error':    { color: '#ff6b6b',              spin: false, label: 'Sync fehlgeschlagen – tippen zum erneuten Versuch' },
+  'error':    { color: '#F88379',              spin: false, label: 'Sync fehlgeschlagen – tippen zum erneuten Versuch' },
   'offline':  { color: 'var(--text-muted)',   spin: false, label: 'Offline' },
 };
 
