@@ -456,6 +456,27 @@ input, select, textarea {
   color: #ff4757;
 }
 
+.card-action-btn.btn-quick-done {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.card-action-btn.btn-quick-done:hover {
+  color: var(--coral);
+  background: var(--coral-dim);
+  border-color: var(--coral-border);
+}
+
+.card-action-btn.btn-quick-done.is-done {
+  color: var(--coral);
+  background: var(--coral-dim);
+  border-color: var(--coral-border);
+  box-shadow: var(--coral-glow);
+}
+
 /* Episode progress bar */
 .episode-bar {
   margin-top: 8px;

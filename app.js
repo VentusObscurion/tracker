@@ -91,6 +91,70 @@ const SORT_OPTIONS = [
 const STORAGE_KEY = 'tracker-v1-data';
 
 // ======================================================
+//  DEFAULT DATA (Vorauswahl beim ersten Start)
+// ======================================================
+
+const DEFAULT_DATA = {
+  games: [
+    // --- Mario ---
+    { id: 'dg-01', title: 'Super Mario Odyssey',                         platform: 'Nintendo Switch',   genres: ['platformer', 'adventure'], status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-02', title: 'Super Mario Bros. Wonder',                    platform: 'Nintendo Switch',   genres: ['platformer'],              status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-03', title: 'Mario Kart 8 Deluxe',                         platform: 'Nintendo Switch',   genres: ['racing', 'sport'],         status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-04', title: "Super Mario 3D World + Bowser's Fury",        platform: 'Nintendo Switch',   genres: ['platformer', 'adventure'], status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-05', title: 'Paper Mario: The Origami King',               platform: 'Nintendo Switch',   genres: ['rpg', 'adventure'],        status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-06', title: 'Mario + Rabbids Kingdom Battle',              platform: 'Nintendo Switch',   genres: ['strategy'],                status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-07', title: 'Mario + Rabbids Sparks of Hope',              platform: 'Nintendo Switch',   genres: ['strategy'],                status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    // --- Zelda ---
+    { id: 'dg-08', title: 'The Legend of Zelda: Breath of the Wild',    platform: 'Nintendo Switch',   genres: ['adventure', 'action'],     status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-09', title: 'The Legend of Zelda: Tears of the Kingdom',  platform: 'Nintendo Switch',   genres: ['adventure', 'action'],     status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-10', title: 'The Legend of Zelda: Skyward Sword HD',      platform: 'Nintendo Switch',   genres: ['adventure', 'action'],     status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-11', title: "The Legend of Zelda: Link's Awakening",      platform: 'Nintendo Switch',   genres: ['adventure', 'puzzle'],     status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-12', title: 'The Legend of Zelda: Echoes of Wisdom',      platform: 'Nintendo Switch',   genres: ['adventure', 'puzzle'],     status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    // --- Pokémon ---
+    { id: 'dg-13', title: "Pokémon Let's Go, Pikachu! / Eevee!",        platform: 'Nintendo Switch',   genres: ['rpg', 'adventure'],        status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-14', title: 'Pokémon Sword / Shield',                     platform: 'Nintendo Switch',   genres: ['rpg', 'adventure'],        status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-15', title: 'Pokémon Brilliant Diamond / Shining Pearl',  platform: 'Nintendo Switch',   genres: ['rpg', 'adventure'],        status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-16', title: 'Pokémon Legends: Arceus',                    platform: 'Nintendo Switch',   genres: ['rpg', 'action'],           status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-17', title: 'Pokémon Scarlet / Violet',                   platform: 'Nintendo Switch',   genres: ['rpg', 'adventure'],        status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    // --- Xenoblade ---
+    { id: 'dg-18', title: 'Xenoblade Chronicles: Definitive Edition',   platform: 'Nintendo Switch',   genres: ['rpg', 'action'],           status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-19', title: 'Xenoblade Chronicles 2',                     platform: 'Nintendo Switch',   genres: ['rpg', 'action'],           status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-20', title: 'Xenoblade Chronicles 3',                     platform: 'Nintendo Switch',   genres: ['rpg', 'action'],           status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+    { id: 'dg-21', title: 'Xenoblade Chronicles X: Definitive Edition', platform: 'Nintendo Switch 2', genres: ['rpg', 'action'],           status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', notes: '' },
+  ],
+  anime: [
+    { id: 'da-01', title: 'Attack on Titan',                            genres: ['action', 'thriller', 'drama'],    status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 94,  notes: '' },
+    { id: 'da-02', title: 'Demon Slayer: Kimetsu no Yaiba',             genres: ['action', 'shounen', 'fantasy'],   status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 55,  notes: '' },
+    { id: 'da-03', title: 'Jujutsu Kaisen',                             genres: ['action', 'shounen', 'horror'],    status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 47,  notes: '' },
+    { id: 'da-04', title: 'My Hero Academia',                           genres: ['action', 'shounen'],              status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 138, notes: '' },
+    { id: 'da-05', title: 'One Punch Man',                              genres: ['action', 'comedy', 'shounen'],    status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 24,  notes: '' },
+    { id: 'da-06', title: 'Fullmetal Alchemist: Brotherhood',           genres: ['action', 'adventure', 'drama'],   status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 64,  notes: '' },
+    { id: 'da-07', title: 'Death Note',                                 genres: ['thriller', 'psycho', 'drama'],    status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 37,  notes: '' },
+    { id: 'da-08', title: 'Steins;Gate',                                genres: ['scifi', 'thriller', 'drama'],     status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 24,  notes: '' },
+    { id: 'da-09', title: 'Re:Zero − Starting Life in Another World',   genres: ['isekai', 'fantasy', 'drama'],     status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 50,  notes: '' },
+    { id: 'da-10', title: 'Sword Art Online',                           genres: ['action', 'isekai', 'adventure'],  status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 99,  notes: '' },
+    { id: 'da-11', title: 'Hunter x Hunter (2011)',                     genres: ['action', 'adventure', 'shounen'], status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 148, notes: '' },
+    { id: 'da-12', title: 'Naruto Shippuden',                           genres: ['action', 'adventure', 'shounen'], status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 500, notes: '' },
+    { id: 'da-13', title: 'Dragon Ball Super',                          genres: ['action', 'adventure', 'shounen'], status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 131, notes: '' },
+    { id: 'da-14', title: 'Tokyo Ghoul',                                genres: ['action', 'horror', 'drama'],      status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 48,  notes: '' },
+    { id: 'da-15', title: 'Vinland Saga',                               genres: ['action', 'adventure', 'drama'],   status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 48,  notes: '' },
+    { id: 'da-16', title: 'Spy × Family',                               genres: ['comedy', 'action', 'sol'],        status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 37,  notes: '' },
+    { id: 'da-17', title: 'Chainsaw Man',                               genres: ['action', 'horror', 'shounen'],    status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 12,  notes: '' },
+    { id: 'da-18', title: "Frieren: Beyond Journey's End",              genres: ['fantasy', 'adventure', 'drama'],  status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 28,  notes: '' },
+    { id: 'da-19', title: 'Haikyuu!!',                                  genres: ['sport', 'shounen', 'drama'],      status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 85,  notes: '' },
+    { id: 'da-20', title: 'Made in Abyss',                              genres: ['adventure', 'fantasy', 'horror'], status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 25,  notes: '' },
+    { id: 'da-21', title: 'That Time I Got Reincarnated as a Slime',    genres: ['isekai', 'fantasy', 'comedy'],    status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 48,  notes: '' },
+    { id: 'da-22', title: 'Mushoku Tensei: Jobless Reincarnation',      genres: ['isekai', 'fantasy', 'adventure'], status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 23,  notes: '' },
+    { id: 'da-23', title: 'Kaguya-sama: Love Is War',                   genres: ['comedy', 'romance'],              status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 37,  notes: '' },
+    { id: 'da-24', title: 'Oshi no Ko',                                 genres: ['drama', 'thriller', 'psycho'],    status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 23,  notes: '' },
+    { id: 'da-25', title: 'Black Clover',                               genres: ['action', 'fantasy', 'shounen'],   status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 170, notes: '' },
+    { id: 'da-26', title: 'Overlord',                                   genres: ['isekai', 'fantasy', 'action'],    status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 52,  notes: '' },
+    { id: 'da-27', title: 'Violet Evergarden',                          genres: ['drama', 'romance', 'sol'],        status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 13,  notes: '' },
+    { id: 'da-28', title: 'Dr. Stone',                                  genres: ['adventure', 'scifi', 'shounen'],  status: 'geplant', rating: 0, dateAdded: '2026-06-01', dateStarted: '', dateLast: '', episodesCurrent: 0, episodesTotal: 35,  notes: '' },
+  ],
+};
+
+// ======================================================
 //  STATE
 // ======================================================
 
@@ -114,8 +178,12 @@ function loadData() {
       const parsed = JSON.parse(raw);
       if (parsed && Array.isArray(parsed.games) && Array.isArray(parsed.anime)) {
         state.data = parsed;
+        return;
       }
     }
+    // Erste App-Öffnung: Vorauswahl laden
+    state.data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    saveData();
   } catch {
     console.warn('Tracker: Fehler beim Laden der Daten.');
   }
@@ -238,6 +306,10 @@ function render() {
         e.stopPropagation();
         confirmDelete(id);
       });
+      card.querySelector('.btn-quick-done')?.addEventListener('click', e => {
+        e.stopPropagation();
+        quickDone(id);
+      });
     });
   }
 
@@ -248,6 +320,7 @@ function render() {
 function renderCard(item) {
   const statuses = getStatuses(state.tab);
   const status   = statuses[item.status] ?? { label: item.status, css: item.status };
+  const isDone   = item.status === 'gespielt' || item.status === 'geschaut';
 
   const genreBadges = (item.genres ?? [])
     .map(g => `<span class="genre-badge">${getGenreLabel(g, state.tab)}</span>`)
@@ -293,6 +366,7 @@ function renderCard(item) {
       <div class="card-bottom">
         ${ratingHtml}
         <div class="card-actions">
+          <button class="card-action-btn btn-quick-done${isDone ? ' is-done' : ''}" title="${isDone ? 'Abgehakt' : 'Als gespielt/geschaut markieren'}" aria-label="Abhaken">✓</button>
           <button class="card-action-btn btn-edit" title="Bearbeiten" aria-label="Bearbeiten">✏️</button>
           <button class="card-action-btn btn-delete danger" title="Löschen" aria-label="Löschen">🗑️</button>
         </div>
@@ -632,6 +706,23 @@ function deleteEntry(id) {
   state.data[state.tab] = state.data[state.tab].filter(i => i.id !== id);
   saveData();
   render();
+}
+
+function quickDone(id) {
+  const list = state.data[state.tab];
+  const idx  = list.findIndex(i => i.id === id);
+  if (idx === -1) return;
+  const item       = list[idx];
+  const doneStatus = state.tab === 'games' ? 'gespielt' : 'geschaut';
+  list[idx] = {
+    ...item,
+    status:      doneStatus,
+    dateLast:    today(),
+    dateStarted: item.dateStarted || today(),
+  };
+  saveData();
+  render();
+  showToast(`„${item.title}" abgehakt ✓`);
 }
 
 // ======================================================
