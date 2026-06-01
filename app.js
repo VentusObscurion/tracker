@@ -192,6 +192,7 @@ function loadData() {
 function saveData() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data));
+    schedulePush();
   } catch {
     showToast('⚠️ Speichern fehlgeschlagen!');
   }
@@ -726,6 +727,256 @@ function quickDone(id) {
 }
 
 // ======================================================
+//  GITHUB SYNC
+// ======================================================
+
+const SYNC_TOKEN_KEY = 'tracker-sync-token';
+const SYNC_SHA_KEY   = 'tracker-sync-sha';
+const GITHUB_OWNER   = 'VentusObscurion';
+const GITHUB_REPO    = 'tracker';
+const GITHUB_FILE    = 'data.json';
+const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+
+const sync = {
+  token:         null,
+  sha:           null,
+  status:        'no-token', // 'no-token' | 'idle' | 'syncing' | 'ok' | 'error' | 'offline'
+  lastSync:      null,
+  dirty:         false,
+  debounceTimer: null,
+};
+
+// ---- Config ----
+
+function loadSyncConfig() {
+  sync.token = localStorage.getItem(SYNC_TOKEN_KEY) || null;
+  sync.sha   = localStorage.getItem(SYNC_SHA_KEY)   || null;
+}
+
+function saveSyncToken(token) {
+  if (token) {
+    sync.token = token;
+    localStorage.setItem(SYNC_TOKEN_KEY, token);
+  } else {
+    sync.token = null;
+    sync.sha   = null;
+    localStorage.removeItem(SYNC_TOKEN_KEY);
+    localStorage.removeItem(SYNC_SHA_KEY);
+  }
+}
+
+// ---- Status UI ----
+
+const SYNC_STATUS_MAP = {
+  'no-token': { color: 'var(--text-muted)',   spin: false, label: 'Sync nicht konfiguriert' },
+  'idle':     { color: 'var(--text-muted)',   spin: false, label: 'Bereit' },
+  'syncing':  { color: 'var(--coral)',         spin: true,  label: 'Synchronisiere…' },
+  'ok':       { color: 'var(--status-active)', spin: false, label: null }, // label set dynamically
+  'error':    { color: '#ff6b6b',              spin: false, label: 'Sync fehlgeschlagen – tippen zum erneuten Versuch' },
+  'offline':  { color: 'var(--text-muted)',   spin: false, label: 'Offline' },
+};
+
+function setSyncStatus(status) {
+  sync.status = status;
+  updateSyncUI();
+}
+
+function updateSyncUI() {
+  const btn  = document.getElementById('btn-sync');
+  const icon = document.getElementById('sync-icon');
+  const line = document.getElementById('sync-status-line');
+  const s    = SYNC_STATUS_MAP[sync.status] ?? SYNC_STATUS_MAP['idle'];
+
+  if (btn)  btn.style.color = s.color;
+  if (icon) {
+    if (s.spin) icon.classList.add('spin');
+    else        icon.classList.remove('spin');
+  }
+
+  const label = sync.status === 'ok' && sync.lastSync
+    ? `Zuletzt synchronisiert: ${sync.lastSync.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}`
+    : (s.label ?? '');
+
+  if (btn)  btn.title = label;
+  if (line) line.textContent = label;
+}
+
+// ---- Base64 helpers (Unicode-safe) ----
+
+function toBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  bytes.forEach(b => (bin += String.fromCharCode(b)));
+  return btoa(bin);
+}
+
+function fromBase64(b64) {
+  const bin   = atob(b64.replace(/\s/g, ''));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder('utf-8').decode(bytes);
+}
+
+// ---- API calls ----
+
+async function githubPull() {
+  if (!sync.token) { setSyncStatus('no-token'); return false; }
+  setSyncStatus('syncing');
+  try {
+    const res = await fetch(GITHUB_API_URL, {
+      cache: 'no-store',
+      headers: {
+        'Authorization':        `Bearer ${sync.token}`,
+        'Accept':               'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    });
+
+    if (res.status === 404) {
+      // data.json doesn't exist yet — first push will create it
+      sync.lastSync = new Date();
+      setSyncStatus('ok');
+      return true;
+    }
+
+    if (!res.ok) {
+      setSyncStatus('error');
+      showToast('⚠️ GitHub Pull fehlgeschlagen (' + res.status + ')');
+      return false;
+    }
+
+    const json    = await res.json();
+    const decoded = JSON.parse(fromBase64(json.content));
+
+    if (decoded && Array.isArray(decoded.games) && Array.isArray(decoded.anime)) {
+      state.data = { games: decoded.games, anime: decoded.anime };
+      // Persist locally without triggering another push
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data)); } catch {}
+      render();
+    }
+
+    sync.sha      = json.sha;
+    sync.lastSync = new Date();
+    localStorage.setItem(SYNC_SHA_KEY, json.sha);
+    setSyncStatus('ok');
+    return true;
+  } catch {
+    setSyncStatus(navigator.onLine ? 'error' : 'offline');
+    return false;
+  }
+}
+
+async function githubPush() {
+  if (!sync.token) { setSyncStatus('no-token'); return false; }
+  setSyncStatus('syncing');
+  try {
+    const body = {
+      message: `sync: ${new Date().toISOString()}`,
+      content: toBase64(JSON.stringify(state.data, null, 2)),
+    };
+    if (sync.sha) body.sha = sync.sha;
+
+    const res = await fetch(GITHUB_API_URL, {
+      method: 'PUT',
+      headers: {
+        'Authorization':        `Bearer ${sync.token}`,
+        'Accept':               'application/vnd.github+json',
+        'Content-Type':         'application/json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (res.status === 409) {
+      // SHA conflict — pull first then re-push
+      showToast('Sync-Konflikt wird aufgelöst…');
+      const pulled = await githubPull();
+      if (pulled) return githubPush();
+      return false;
+    }
+
+    if (!res.ok) {
+      setSyncStatus('error');
+      showToast('⚠️ GitHub Push fehlgeschlagen (' + res.status + ')');
+      return false;
+    }
+
+    const json = await res.json();
+    sync.sha      = json.content.sha;
+    sync.dirty    = false;
+    sync.lastSync = new Date();
+    localStorage.setItem(SYNC_SHA_KEY, json.content.sha);
+    setSyncStatus('ok');
+    return true;
+  } catch {
+    setSyncStatus(navigator.onLine ? 'error' : 'offline');
+    return false;
+  }
+}
+
+function schedulePush() {
+  if (!sync.token) return;
+  sync.dirty = true;
+  clearTimeout(sync.debounceTimer);
+  sync.debounceTimer = setTimeout(() => githubPush(), 4000);
+}
+
+function manualSync() {
+  if (sync.status === 'syncing') return;
+  clearTimeout(sync.debounceTimer);
+  githubPush().then(ok => {
+    if (ok) showToast('Sync erfolgreich ✓');
+  });
+}
+
+// ---- Settings Modal ----
+
+function openSettingsModal() {
+  const field = document.getElementById('settings-token');
+  if (field) field.value = sync.token ?? '';
+  updateSyncUI();
+  openModal('modal-settings-backdrop');
+}
+
+function applySettings() {
+  const raw = document.getElementById('settings-token')?.value.trim() ?? '';
+  saveSyncToken(raw || null);
+  closeModal('modal-settings-backdrop');
+  if (sync.token) {
+    showToast('Token gespeichert, lade Daten…');
+    githubPull().then(ok => { if (ok) showToast('Daten geladen ✓'); });
+  } else {
+    setSyncStatus('no-token');
+    showToast('Token entfernt – nur lokaler Speicher');
+  }
+}
+
+// ---- Lifecycle ----
+
+function initSync() {
+  loadSyncConfig();
+  if (!sync.token) { setSyncStatus('no-token'); return; }
+
+  // Pull on startup
+  githubPull();
+
+  // Push when app is hidden (minimized / tab switch / phone sleeps)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && sync.dirty && sync.token) {
+      clearTimeout(sync.debounceTimer);
+      githubPush();
+    }
+  });
+
+  // Handle online/offline
+  window.addEventListener('online',  () => {
+    if (sync.dirty && sync.token) githubPush();
+    else if (sync.token) setSyncStatus('ok');
+  });
+  window.addEventListener('offline', () => setSyncStatus('offline'));
+}
+
+// ======================================================
 //  EXPORT / IMPORT
 // ======================================================
 
@@ -856,7 +1107,7 @@ function initEventListeners() {
   });
 
   // Close modals by clicking backdrop
-  ['modal-form-backdrop', 'modal-detail-backdrop', 'modal-confirm-backdrop'].forEach(id => {
+  ['modal-form-backdrop', 'modal-detail-backdrop', 'modal-confirm-backdrop', 'modal-settings-backdrop'].forEach(id => {
     document.getElementById(id)?.addEventListener('click', e => {
       if (e.target.id === id) closeModal(id);
     });
@@ -865,7 +1116,7 @@ function initEventListeners() {
   // Keyboard: Escape closes any open modal
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
-    ['modal-confirm-backdrop', 'modal-form-backdrop', 'modal-detail-backdrop'].forEach(id => {
+    ['modal-settings-backdrop', 'modal-confirm-backdrop', 'modal-form-backdrop', 'modal-detail-backdrop'].forEach(id => {
       const el = document.getElementById(id);
       if (el?.classList.contains('open')) { closeModal(id); }
     });
@@ -880,6 +1131,21 @@ function initEventListeners() {
     if (file) importData(file);
     e.target.value = '';
   });
+
+  // Sync button (manual)
+  document.getElementById('btn-sync').addEventListener('click', () => {
+    if (!sync.token) {
+      openSettingsModal();
+    } else {
+      manualSync();
+    }
+  });
+
+  // Settings modal
+  document.getElementById('btn-settings').addEventListener('click', openSettingsModal);
+  document.getElementById('modal-settings-close').addEventListener('click',  () => closeModal('modal-settings-backdrop'));
+  document.getElementById('modal-settings-cancel').addEventListener('click', () => closeModal('modal-settings-backdrop'));
+  document.getElementById('btn-settings-save').addEventListener('click', applySettings);
 }
 
 // ======================================================
@@ -904,6 +1170,7 @@ function init() {
   syncFilterOptions();
   render();
   registerServiceWorker();
+  initSync();
 }
 
 document.addEventListener('DOMContentLoaded', init);
