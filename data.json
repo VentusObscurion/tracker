@@ -272,13 +272,13 @@
       "title": "Xenoblade Chronicles 2",
       "platform": "Nintendo Switch",
       "genres": [
-        "rpg",
-        "action"
+        "action",
+        "rpg"
       ],
-      "status": "geplant",
-      "rating": 0,
+      "status": "gespielt",
+      "rating": 10,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
+      "dateStarted": "2018-12-06",
       "dateLast": "",
       "notes": ""
     },
