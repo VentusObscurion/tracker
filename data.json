@@ -315,6 +315,21 @@
   ],
   "anime": [
     {
+      "id": "mqau4b4k-8sm3k",
+      "title": "Horimiya",
+      "status": "geschaut",
+      "genres": [
+        "romance"
+      ],
+      "rating": 10,
+      "dateAdded": "2026-06-11",
+      "dateStarted": "",
+      "dateLast": "2026-06-11",
+      "notes": "",
+      "episodesCurrent": 25,
+      "episodesTotal": 25
+    },
+    {
       "id": "da-01",
       "title": "Attack on Titan",
       "genres": [
