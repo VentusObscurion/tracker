@@ -315,6 +315,22 @@
   ],
   "anime": [
     {
+      "id": "mqau5ia3-743q8",
+      "title": "My Dress-up Darling",
+      "status": "schauend",
+      "genres": [
+        "romance",
+        "sol"
+      ],
+      "rating": 8,
+      "dateAdded": "2026-06-12",
+      "dateStarted": "",
+      "dateLast": "2026-06-12",
+      "notes": "",
+      "episodesCurrent": 11,
+      "episodesTotal": 24
+    },
+    {
       "id": "mqau4b4k-8sm3k",
       "title": "Horimiya",
       "status": "geschaut",
