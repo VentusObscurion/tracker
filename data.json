@@ -354,11 +354,11 @@
         "thriller",
         "drama"
       ],
-      "status": "geplant",
+      "status": "geschaut",
       "rating": 0,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-06-12",
+      "dateLast": "2026-06-12",
       "episodesCurrent": 0,
       "episodesTotal": 94,
       "notes": ""
@@ -371,11 +371,11 @@
         "shounen",
         "fantasy"
       ],
-      "status": "geplant",
+      "status": "geschaut",
       "rating": 0,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-06-12",
+      "dateLast": "2026-06-12",
       "episodesCurrent": 0,
       "episodesTotal": 55,
       "notes": ""
@@ -388,11 +388,11 @@
         "shounen",
         "horror"
       ],
-      "status": "geplant",
+      "status": "geschaut",
       "rating": 0,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-06-12",
+      "dateLast": "2026-06-12",
       "episodesCurrent": 0,
       "episodesTotal": 47,
       "notes": ""
@@ -404,11 +404,11 @@
         "action",
         "shounen"
       ],
-      "status": "geplant",
+      "status": "geschaut",
       "rating": 0,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-06-12",
+      "dateLast": "2026-06-12",
       "episodesCurrent": 0,
       "episodesTotal": 138,
       "notes": ""
