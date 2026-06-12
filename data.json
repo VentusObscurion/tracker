@@ -604,16 +604,16 @@
       "id": "da-16",
       "title": "Spy × Family",
       "genres": [
-        "comedy",
         "action",
+        "comedy",
         "sol"
       ],
       "status": "geschaut",
-      "rating": 0,
+      "rating": 9,
       "dateAdded": "2026-06-01",
       "dateStarted": "2026-06-12",
       "dateLast": "2026-06-12",
-      "episodesCurrent": 0,
+      "episodesCurrent": 37,
       "episodesTotal": 37,
       "notes": ""
     },
@@ -625,11 +625,11 @@
         "horror",
         "shounen"
       ],
-      "status": "geplant",
+      "status": "geschaut",
       "rating": 0,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-06-12",
+      "dateLast": "2026-06-12",
       "episodesCurrent": 0,
       "episodesTotal": 12,
       "notes": ""
@@ -659,11 +659,11 @@
         "shounen",
         "drama"
       ],
-      "status": "geplant",
+      "status": "geschaut",
       "rating": 0,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-06-12",
+      "dateLast": "2026-06-12",
       "episodesCurrent": 0,
       "episodesTotal": 85,
       "notes": ""
