@@ -1,6 +1,22 @@
 {
   "games": [
     {
+      "id": "mrk94n8k-ehwy1",
+      "title": "Persona 3 Reload",
+      "status": "spielend",
+      "genres": [
+        "action",
+        "adventure",
+        "rpg"
+      ],
+      "rating": 0,
+      "dateAdded": "2026-07-14",
+      "dateStarted": "2026-07-14",
+      "dateLast": "2026-07-14",
+      "notes": "",
+      "platform": "Nintendo Switch 2"
+    },
+    {
       "id": "mrk947ne-7e1ck",
       "title": "Persona 5 Royal",
       "status": "gespielt",
