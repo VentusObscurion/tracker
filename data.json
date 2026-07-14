@@ -34,14 +34,14 @@
       "title": "Mario Kart 8 Deluxe",
       "platform": "Nintendo Switch",
       "genres": [
-        "racing",
-        "sport"
+        "sport",
+        "racing"
       ],
-      "status": "geplant",
-      "rating": 0,
+      "status": "gespielt",
+      "rating": 8,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-07-14",
+      "dateLast": "2026-07-14",
       "notes": ""
     },
     {
