@@ -1,6 +1,22 @@
 {
   "games": [
     {
+      "id": "mrk947ne-7e1ck",
+      "title": "Persona 5 Royal",
+      "status": "gespielt",
+      "genres": [
+        "action",
+        "adventure",
+        "rpg"
+      ],
+      "rating": 10,
+      "dateAdded": "2026-07-14",
+      "dateStarted": "2020-03-13",
+      "dateLast": "2025-05-01",
+      "notes": "",
+      "platform": "Nintendo Switch"
+    },
+    {
       "id": "dg-01",
       "title": "Super Mario Odyssey",
       "platform": "Nintendo Switch",
