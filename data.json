@@ -197,14 +197,14 @@
       "title": "Pokémon Sword / Shield",
       "platform": "Nintendo Switch",
       "genres": [
-        "rpg",
-        "adventure"
+        "adventure",
+        "rpg"
       ],
-      "status": "geplant",
-      "rating": 0,
+      "status": "gespielt",
+      "rating": 4,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-07-01",
+      "dateLast": "2026-07-14",
       "notes": ""
     },
     {
