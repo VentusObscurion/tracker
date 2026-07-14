@@ -81,11 +81,11 @@
       "genres": [
         "strategy"
       ],
-      "status": "geplant",
-      "rating": 0,
+      "status": "gespielt",
+      "rating": 9,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-07-14",
+      "dateLast": "2026-07-14",
       "notes": ""
     },
     {
