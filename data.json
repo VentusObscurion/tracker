@@ -317,15 +317,15 @@
     {
       "id": "mqau5ia3-743q8",
       "title": "My Dress-up Darling",
-      "status": "schauend",
+      "status": "geschaut",
       "genres": [
         "romance",
         "sol"
       ],
       "rating": 8,
       "dateAdded": "2026-06-12",
-      "dateStarted": "",
-      "dateLast": "2026-06-12",
+      "dateStarted": "2026-07-14",
+      "dateLast": "2026-07-14",
       "notes": "",
       "episodesCurrent": 11,
       "episodesTotal": 24
