@@ -318,7 +318,10 @@
       "id": "mrk8u47m-6en6d",
       "title": "Witch Hat Atelier",
       "status": "geschaut",
-      "genres": [],
+      "genres": [
+        "adventure",
+        "fantasy"
+      ],
       "rating": 7,
       "dateAdded": "2026-07-14",
       "dateStarted": "2026-07-01",
