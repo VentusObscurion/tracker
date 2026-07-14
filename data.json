@@ -122,14 +122,14 @@
       "title": "The Legend of Zelda: Tears of the Kingdom",
       "platform": "Nintendo Switch",
       "genres": [
-        "adventure",
-        "action"
+        "action",
+        "adventure"
       ],
-      "status": "geplant",
-      "rating": 0,
+      "status": "gespielt",
+      "rating": 10,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-07-14",
+      "dateLast": "2026-07-14",
       "notes": ""
     },
     {
