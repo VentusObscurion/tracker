@@ -242,14 +242,14 @@
       "title": "Pokémon Scarlet / Violet",
       "platform": "Nintendo Switch",
       "genres": [
-        "rpg",
-        "adventure"
+        "adventure",
+        "rpg"
       ],
-      "status": "geplant",
-      "rating": 0,
+      "status": "abgebrochen",
+      "rating": 3,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2025-02-01",
+      "dateLast": "2025-02-01",
       "notes": ""
     },
     {
