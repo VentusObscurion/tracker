@@ -287,11 +287,11 @@
       "title": "Xenoblade Chronicles 3",
       "platform": "Nintendo Switch",
       "genres": [
-        "rpg",
-        "action"
+        "action",
+        "rpg"
       ],
       "status": "gespielt",
-      "rating": 0,
+      "rating": 10,
       "dateAdded": "2026-06-01",
       "dateStarted": "2026-07-14",
       "dateLast": "2026-07-14",
