@@ -260,7 +260,7 @@
         "action",
         "rpg"
       ],
-      "status": "spielend",
+      "status": "gespielt",
       "rating": 10,
       "dateAdded": "2026-06-01",
       "dateStarted": "2026-07-14",
@@ -290,11 +290,11 @@
         "rpg",
         "action"
       ],
-      "status": "geplant",
+      "status": "gespielt",
       "rating": 0,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-07-14",
+      "dateLast": "2026-07-14",
       "notes": ""
     },
     {
@@ -305,11 +305,11 @@
         "rpg",
         "action"
       ],
-      "status": "geplant",
+      "status": "gespielt",
       "rating": 0,
       "dateAdded": "2026-06-01",
-      "dateStarted": "",
-      "dateLast": "",
+      "dateStarted": "2026-07-14",
+      "dateLast": "2026-07-14",
       "notes": ""
     }
   ],
